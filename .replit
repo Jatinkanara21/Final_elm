@@ -1,0 +1,46 @@
+modules = ["php-8.2", "nodejs-20", "web", "php-8.4"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+APP_URL = "https://40c96137-5d20-4c8c-a692-b70057a005e2-00-1iwz36ljmuvr3.sisko.replit.dev"
+APP_NAME = "Laravel Store"
+TRUSTED_PROXIES = "*"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "php -d upload_max_filesize=20M -d post_max_size=25M artisan serve --host=0.0.0.0 --port=5000"
+waitForPort = 5000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["php", "-d", "upload_max_filesize=20M", "-d", "post_max_size=25M", "artisan", "serve", "--host=0.0.0.0", "--port=5000"]
+build = ["bash", "-c", "composer install --no-dev --optimize-autoloader && npm run build && php artisan config:cache && php artisan route:cache && php artisan view:cache"]
