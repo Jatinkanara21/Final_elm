@@ -39,29 +39,38 @@ class GenerateProductImage implements ShouldQueue
         $brandName = $this->product->brand ? $this->product->brand . ' ' : '';
         $productName = $this->product->name;
 
-        // Using Pollinations AI with Flux model for "Perfect" results
-        // No API key required. Highly reliable and high quality.
+        // Using OpenAI DALL-E 3 for "Perfect" results
+        // It provides high quality, photorealistic images.
         $prompt = "A high-end, professional, studio lighting product photograph of a " . $brandName . $productName . " ($categoryName). " . 
                   "The product is perfectly centered on a pristine, minimalist pure white background. " .
                   "Sharp focus, 8k resolution, photorealistic, elegant design, subtle reflections, luxury e-commerce catalog style. " .
                   "Ultra-high quality commercial photography, perfectly rendered textures.";
 
         try {
-            $encodedPrompt = urlencode($prompt);
-            $imageUrl = "https://image.pollinations.ai/prompt/{$encodedPrompt}?width=800&height=800&model=flux&nologo=true&seed=" . rand(1, 10000);
+            Log::info("Generating perfect image via OpenAI (DALL-E 3) for product {$this->product->id}");
             
-            Log::info("Generating perfect image via Pollinations (Flux) for product {$this->product->id}");
+            $apiKey = config('services.openai.key') ?? env('OPENAI_API_KEY');
             
-            $response = Http::timeout(60)->get($imageUrl);
+            $response = Http::timeout(120)
+                ->withToken($apiKey)
+                ->post('https://api.openai.com/v1/images/generations', [
+                    'model' => 'dall-e-3',
+                    'prompt' => $prompt,
+                    'n' => 1,
+                    'size' => '1024x1024',
+                    'quality' => 'standard', // 'hd' takes more time/cost
+                ]);
 
             if ($response->successful()) {
-                $this->saveImage($response->body(), 'ai');
+                $imageUrl = $response->json('data.0.url');
+                $imageContent = Http::get($imageUrl)->body();
+                $this->saveImage($imageContent, 'openai');
                 return;
             }
             
-            Log::error("Pollinations AI failed for product {$this->product->id}: " . $response->status());
+            Log::error("OpenAI Image Generation failed for product {$this->product->id}: " . $response->body());
         } catch (\Exception $e) {
-            Log::error("Pollinations AI Exception for product {$this->product->id}: " . $e->getMessage());
+            Log::error("OpenAI Exception for product {$this->product->id}: " . $e->getMessage());
         }
     }
 

@@ -10,13 +10,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-mocha-light text-mocha-text font-sans antialiased flex flex-col min-h-screen pb-20 sm:pb-0">
+<body class="bg-mocha-light text-mocha-text font-sans antialiased flex flex-col min-h-screen pb-10 sm:pb-0">
     <x-age-gate />
 
     <!-- Navigation -->
     <nav x-data="{ open: false }" class="bg-mocha-dark border-b border-white/10 shadow-2xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20"> 
+            <div class="flex justify-between h-16"> 
                 <!-- Branding & Logo (Left) -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('home') }}" class="group flex items-center">
@@ -161,7 +161,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-mocha-dark border-t border-white/10 mt-12 py-12">
+    <footer class="bg-mocha-dark border-t border-white/10 mt-6 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="flex flex-col">

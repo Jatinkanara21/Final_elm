@@ -16,19 +16,19 @@
         @endif
     </div>
     
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-48 flex items-center h-full">
-        <div class="max-w-2xl">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32 lg:pt-24 lg:pb-40 flex items-center justify-center h-full">
+        <div class="max-w-2xl text-center">
             <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold font-serif text-mocha-light leading-tight">
                 Discover <span class="text-mocha-accent italic">Rare</span> & <br>Exceptional Spirits
             </h1>
-            <p class="mt-6 text-lg sm:text-xl text-gray-300 max-w-xl">
+            <p class="mt-10 text-lg sm:text-xl text-gray-300 max-w-xl mx-auto">
                 Curated collection of the world's finest whiskies, premium wines, and top-shelf liquor. Delivered directly to your door.
             </p>
-            <div class="mt-10 flex flex-col sm:flex-row gap-4">
-                <a href="{{ route('products.index') }}" class="inline-flex justify-center items-center px-8 py-4 border border-transparent text-base font-bold rounded-md text-white bg-mocha-accent hover:bg-[#A0522D] shadow-[0_0_20px_rgba(139,69,19,0.4)] transition-all transform hover:-translate-y-1">
+            <div class="mt-16 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{{ route('products.index') }}" class="inline-flex justify-center items-center px-5 py-3 sm:px-8 sm:py-4 border border-transparent text-sm sm:text-base font-bold rounded-md text-white bg-mocha-accent hover:bg-[#A0522D] shadow-[0_0_20px_rgba(139,69,19,0.4)] transition-all transform hover:-translate-y-1">
                     Shop Collection
                 </a>
-                <a href="#featured" class="inline-flex justify-center items-center px-8 py-4 border border-white/20 text-base font-bold rounded-md text-mocha-light bg-black/40 hover:bg-black/60 backdrop-blur-md transition-all">
+                <a href="#featured" class="inline-flex justify-center items-center px-5 py-3 sm:px-8 sm:py-4 border border-white/20 text-sm sm:text-base font-bold rounded-md text-mocha-light bg-black/40 hover:bg-black/60 backdrop-blur-md transition-all">
                     View Featured
                 </a>
             </div>
@@ -37,7 +37,7 @@
 </div>
 
 <!-- Featured Categories / Info -->
-<div class="bg-white/80 py-12 border-y border-gray-100">
+<div class="bg-white/80 py-8 border-y border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-gray-100">
             <div class="p-6">
@@ -57,9 +57,9 @@
 </div>
 
 <!-- Featured Products Section -->
-<div id="featured" class="py-24 bg-mocha-light">
+<div id="featured" class="py-12 bg-mocha-light">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
+        <div class="text-center mb-8">
             <h2 class="text-sm font-bold text-gray-500 uppercase tracking-[0.2em] mb-3">Handpicked For You</h2>
             <h3 class="text-4xl font-serif text-mocha-text">Featured Arrivals</h3>
             <div class="w-16 h-1 bg-mocha-accent mx-auto mt-6"></div>
@@ -106,7 +106,7 @@
             @endforeach
         </div>
         
-        <div class="mt-16 text-center">
+        <div class="mt-8 text-center">
             <a href="{{ route('products.index') }}" class="inline-flex items-center space-x-2 text-mocha-accent hover:text-[#A0522D] font-bold transition-colors group">
                 <span>View Full Collection</span>
                 <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>

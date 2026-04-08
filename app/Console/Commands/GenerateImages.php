@@ -9,7 +9,7 @@ use App\Models\Product;
 use App\Jobs\GenerateProductImage;
 
 #[Signature('products:generate-images')]
-#[Description('Dispatches Gemini image generation jobs for products missing images.')]
+#[Description('Dispatches OpenAI DALL-E 3 image generation jobs for products missing images.')]
 class GenerateImages extends Command
 {
     /**
