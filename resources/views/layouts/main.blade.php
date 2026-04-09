@@ -185,8 +185,8 @@
                         <li>7433 N Lindbergh Blvd</li>
                         <li>Hazelwood, MO 63042</li>
                         <li>United States</li>
-                        <li class="pt-1">Phone: (555) 123-4567</li>
-                        <li>Email: info@elmgroveliquor.com</li>
+                        <li class="pt-1">Phone: (314) 837-0090</li>
+                        <li>Email: elmgroveliquor.lindbergh@gmail.com</li>
                     </ul>
                 </div>
                 <div>
