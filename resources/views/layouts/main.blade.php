@@ -199,7 +199,7 @@
             <div class="mt-8 border-t border-white/10 pt-8 flex items-center justify-between">
                 <p class="text-gray-400 text-sm">&copy; {{ date('Y') }} Elm Grove Liquor Store. All rights reserved.</p>
                 <div class="flex space-x-6">
-                    <p class="text-gray-500 text-xs">Must be 18+ to purchase.</p>
+                    <p class="text-gray-500 text-xs">Must be 21+ to purchase.</p>
                 </div>
             </div>
         </div>

@@ -18,16 +18,6 @@
             </label>
             <span class="text-xs text-gray-400">CSV/XLSX only</span>
         </form>
-        <form action="{{ route('admin.products.generate-all-images') }}" method="POST" class="inline">
-            @csrf
-            <input type="hidden" name="force" value="1">
-            <button type="submit" class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-2.5 px-4 rounded-xl transition-all duration-200 shadow-sm text-sm active:scale-95" title="Force regenerate all images to 'Perfect' quality">
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                Force AI Regen
-            </button>
-        </form>
         <form action="{{ route('admin.products.sync-ubereats') }}" method="POST" class="inline">
             @csrf
             <button type="submit" class="inline-flex items-center gap-2 bg-black hover:bg-gray-900 text-white font-semibold py-2.5 px-4 rounded-xl transition-all duration-200 shadow-sm text-sm" title="Sync all products to Uber Eats">
@@ -77,11 +67,8 @@
                             @if($product->image)
                                 <img class="h-12 w-12 rounded-xl object-cover bg-gray-100 p-0.5 border border-gray-100 shadow-sm" src="{{ Storage::url($product->image) }}" alt="">
                             @else
-                                <div class="h-12 w-12 rounded-xl bg-mocha-accent/5 flex flex-col items-center justify-center border border-dashed border-mocha-accent/20 text-[8px] text-mocha-accent font-bold uppercase tracking-tighter text-center px-1">
-                                    <svg class="w-4 h-4 mb-0.5 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                    AI Pending
+                                <div class="h-12 w-12 rounded-xl bg-gray-50 flex items-center justify-center border border-dashed border-gray-200 text-[10px] text-gray-400 font-bold uppercase tracking-tighter text-center">
+                                    No Image
                                 </div>
                             @endif
                             <div class="ml-4">
@@ -94,12 +81,6 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <a href="{{ route('admin.products.edit', $product) }}" class="text-mocha-accent hover:text-[#A0522D] font-bold mr-3">Edit</a>
-                        @if(!$product->image)
-                            <form action="{{ route('admin.products.generate-image', $product) }}" method="POST" class="inline">
-                                @csrf
-                                <button type="submit" class="text-purple-600 hover:text-purple-700 font-bold mr-3" title="Generate AI Image">AI Gen</button>
-                            </form>
-                        @endif
                         <form action="{{ route('admin.products.destroy', $product) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')

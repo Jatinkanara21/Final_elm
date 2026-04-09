@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\Auth\ProviderController;
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -26,6 +27,8 @@ Route::middleware([CheckAgeGate::class])->group(function () {
     
     Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 });
+
+Route::get('/generate-image/{name}', [ProductImageController::class, 'generateImage']);
 
 // Google Socialite
 Route::get('/auth/google', [ProviderController::class, 'redirect'])->name('auth.google');
@@ -59,9 +62,7 @@ Route::middleware(['auth', CheckAdmin::class])->prefix('admin')->name('admin.')-
     Route::delete('products/delete-all', [AdminProductController::class, 'deleteAll'])->name('products.deleteAll');
     Route::resource('products', AdminProductController::class);
     Route::post('products/import', [AdminProductController::class, 'import'])->name('products.import');
-    Route::post('products/generate-all-images', [AdminProductController::class, 'generateAllImages'])->name('products.generate-all-images');
     Route::post('products/sync-ubereats', [AdminProductController::class, 'syncToUberEats'])->name('products.sync-ubereats');
-    Route::post('products/{product}/generate-image', [AdminProductController::class, 'generateImage'])->name('products.generate-image');
     Route::post('ubereats/webhook', [UberEatsWebhookController::class, 'handle']);
     Route::resource('users', AdminUserController::class);
     Route::resource('reviews', AdminReviewController::class);

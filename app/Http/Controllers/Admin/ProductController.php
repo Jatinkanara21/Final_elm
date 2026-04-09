@@ -26,7 +26,8 @@ class ProductController extends Controller
             "name" => "required|string|max:255",
             "category_id" => "required|exists:categories,id",
             "image" => "nullable|image|mimes:jpeg,png,jpg,gif|max:20480",
-            "brand" => "nullable|string"
+            "brand" => "nullable|string",
+            "description" => "nullable|string"
         ]);
 
         $data = $request->except("image");
@@ -38,10 +39,10 @@ class ProductController extends Controller
 
         $product = Product::create($data);
 
-        // Notify Customers
+        // Notify Customers via Queue
         $users = \App\Models\User::where('is_admin', 0)->get();
         foreach ($users as $user) {
-            \Illuminate\Support\Facades\Mail::to($user->email)->send(new \App\Mail\NewProductMail($product));
+            \Illuminate\Support\Facades\Mail::to($user->email)->queue(new \App\Mail\NewProductMail($product));
         }
 
         return redirect()->route("admin.products.index")->with("success", "Product created and notifications sent.");
@@ -101,32 +102,6 @@ class ProductController extends Controller
         }
     }
 
-    public function generateImage(Product $product)
-    {
-        \App\Jobs\GenerateProductImage::dispatch($product);
-        return redirect()->back()->with('success', 'Image generation job started for ' . $product->name . '. It will appear shortly.');
-    }
-
-    public function generateAllImages(Request $request)
-    {
-        set_time_limit(600); // 10 mins for bulk force gen
-        $force = $request->has('force');
-        
-        $query = Product::query();
-        if (!$force) {
-            $query->whereNull('image')->orWhere('image', '');
-        } else {
-            // In force mode, we pick everything that isn't already a confirmed 'ai_' image
-            $query->where('image', 'NOT LIKE', 'products/ai_%');
-        }
-
-        $products = $query->get();
-        foreach ($products as $product) {
-            \App\Jobs\GenerateProductImage::dispatch($product);
-        }
-        
-        return redirect()->back()->with('success', 'Image generation jobs started for ' . $products->count() . ' products.');
-    }
 
     public function syncToUberEats()
     {

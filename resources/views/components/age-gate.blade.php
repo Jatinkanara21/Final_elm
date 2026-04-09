@@ -54,19 +54,19 @@
 
         <!-- Description -->
         <p class="text-gray-400 text-sm leading-relaxed mb-10 px-4">
-            You must be of legal drinking age (18+) to enter this site.<br>
-            By continuing, you confirm you are at least 18 years old.
+            You must be of legal drinking age (21+) to enter this site.<br>
+            By continuing, you confirm you are at least 21 years old.
         </p>
 
         <!-- Buttons -->
         <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
             <button @click="verifyAge()"
                 class="flex-1 bg-mocha-accent hover:bg-[#A0522D] text-white font-semibold py-3.5 px-6 rounded transition-all duration-200 hover:shadow-[0_0_20px_rgba(139,69,19,0.4)] tracking-wide text-sm uppercase">
-                Yes, I am 18+
+                Yes, I am 21+
             </button>
             <button @click="declineAge()"
                 class="flex-1 border border-white/10 hover:border-white/20 text-gray-400 hover:text-gray-200 font-medium py-3.5 px-6 rounded transition-all duration-200 tracking-wide text-sm uppercase">
-                Under 18
+                Under 21
             </button>
         </div>
 
